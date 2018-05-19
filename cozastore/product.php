@@ -1,15 +1,68 @@
-<!DOCTYPE html>
 <?php 
 session_start();
-include 'connection.php';
+$connect = mysqli_connect("localhost", "root", "", "food4u");
 
-//select product table
-	$query = "SELECT * FROM tbl_product ORDER BY id ASC";
-	$result = mysqli_query($connect, $query);
-	if(mysqli_num_rows($result) > 0){
-		while($row = mysqli_fetch_array($result))
+ if (!isset($_SESSION['username'])) {
+  	$_SESSION['msg'] = "You must log in first";
+  	header('location: login.php');
+  }
+  if (isset($_GET['logout'])) {
+  	session_destroy();
+  	unset($_SESSION['username']);
+  	header("location: login.php");
+  }
+
+if(isset($_POST["add_to_cart"]))
+{
+	if(isset($_SESSION["shopping_cart"]))
 	{
+		$item_array_id = array_column($_SESSION["shopping_cart"], "item_id");
+		if(!in_array($_GET["id"], $item_array_id))
+		{
+			$count = count($_SESSION["shopping_cart"]);
+			$item_array = array(
+				'item_id'			=>	$_GET["id"],
+				'item_name'			=>	$_POST["hidden_name"],
+				'item_price'		=>	$_POST["hidden_price"],
+				'item_quantity'		=>	$_POST["quantity"]
+			);
+			$_SESSION["shopping_cart"][$count] = $item_array;
+		}
+		else
+		{
+			echo '<script>alert("Item Already Added")</script>';
+		}
+	}
+	else
+	{
+		$item_array = array(
+			'item_id'			=>	$_GET["id"],
+			'item_name'			=>	$_POST["hidden_name"],
+			'item_price'		=>	$_POST["hidden_price"],
+			'item_quantity'		=>	$_POST["quantity"]
+		);
+		$_SESSION["shopping_cart"][0] = $item_array;
+	}
+}
+
+if(isset($_GET["action"]))
+{
+	if($_GET["action"] == "delete")
+	{
+		foreach($_SESSION["shopping_cart"] as $keys => $values)
+		{
+			if($values["item_id"] == $_GET["id"])
+			{
+				unset($_SESSION["shopping_cart"][$keys]);
+				echo '<script>alert("Item Removed")</script>';
+				echo '<script>window.location="cart.php"</script>';
+			}
+		}
+	}
+}
+
 ?>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 	<title>Product</title>
@@ -47,7 +100,7 @@ include 'connection.php';
 <!--===============================================================================================-->
 </head>
 <body class="animsition">
-	
+
 	<!-- Header -->
 	<header class="header-v4">
 		<!-- Header desktop -->
@@ -71,9 +124,11 @@ include 'connection.php';
 						<a href="#" class="flex-c-m trans-04 p-lr-25">
 							EN
 						</a>
-
+					    <?php  if (isset($_SESSION['username'])) : ?>
 						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							USD
+		
+    					<?php echo $_SESSION['username']; ?>
+    					<?php endif; ?>
 						</a>
 					</div>
 				</div>
@@ -577,11 +632,20 @@ include 'connection.php';
 
 			<!--Start All Menu section-->
 			<div class="row isotope-grid">
+						<?php
+				$query = "SELECT * FROM tbl_product ORDER BY id ASC";
+				$result = mysqli_query($connect, $query);
+				if(mysqli_num_rows($result) > 0)
+				{
+					while($row = mysqli_fetch_array($result))
+					{
+				?>
 				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
+
 					<!-- Block2 -->
 					<div class="block2">
 						<div class="block2-pic hov-img0">
-							<img src="images/product-01.jpg" alt="IMG-PRODUCT">
+							<img src="images/<?php echo $row["image"]; ?>" class="img-responsive" />
 
 							<a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 								Quick View
@@ -591,12 +655,12 @@ include 'connection.php';
 						<div class="block2-txt flex-w flex-t p-t-14">
 							<div class="block2-txt-child1 flex-col-l ">
 								<a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-									Nasi Ayam
+	
+								<?php echo $row["name"]; ?>
 								</a>
 
 								<span class="stext-105 cl3">
-									RM4.00
-								</span>
+								RM<?php echo $row["price"]; ?>								</span>
 							</div>
 
 							<div class="block2-txt-child2 flex-r p-t-3">
@@ -613,7 +677,7 @@ include 'connection.php';
 					<!-- Block2 -->
 					<div class="block2">
 						<div class="block2-pic hov-img0">
-							<img src="images/product-02.jpg" alt="IMG-PRODUCT">
+							<img src="images/<?php echo $row["image"]; ?>" class="img-responsive" />
 
 							<a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 								Quick View
@@ -623,11 +687,11 @@ include 'connection.php';
 						<div class="block2-txt flex-w flex-t p-t-14">
 							<div class="block2-txt-child1 flex-col-l ">
 								<a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-									Nasi Ayam Penyet
+									<?php echo $row["name"]; ?>
 								</a>
 
 								<span class="stext-105 cl3">
-									RM4.50
+									RM<?php echo $row["price"]; ?>
 								</span>
 							</div>
 
@@ -645,7 +709,7 @@ include 'connection.php';
 					<!-- Block2 -->
 					<div class="block2">
 						<div class="block2-pic hov-img0">
-							<img src="images/product-03.jpg" alt="IMG-PRODUCT">
+							<img src="images/<?php echo $row["image"]; ?>" class="img-responsive" />
 
 							<a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 								Quick View
@@ -655,11 +719,10 @@ include 'connection.php';
 						<div class="block2-txt flex-w flex-t p-t-14">
 							<div class="block2-txt-child1 flex-col-l ">
 								<a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-									Mee Goreng Basah
-								</a>
+								<?php echo $row["name"]; ?>								</a>
 
 								<span class="stext-105 cl3">
-									RM4.00
+									RM<?php echo $row["price"]; ?>
 								</span>
 							</div>
 
@@ -843,7 +906,10 @@ include 'connection.php';
 		</div>
 	</div>
 		
-
+			<?php
+					}
+				}
+			?>
 		<!-- Footer -->
 	<footer class="bg3 p-t-75 p-b-32">
 		<div class="container">
