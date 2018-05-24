@@ -12,6 +12,7 @@ $connect = mysqli_connect("localhost", "root", "", "food4u");
   	header("location: login.php");
   }
 
+//<!--Add to cart-->
 if(isset($_POST["add_to_cart"]))
 {
 	if(isset($_SESSION["shopping_cart"]))
@@ -41,6 +42,7 @@ if(isset($_POST["add_to_cart"]))
 	}
 }
 
+//<!--Delete product-->
 if(isset($_GET["action"]))
 {
 	if($_GET["action"] == "delete")
