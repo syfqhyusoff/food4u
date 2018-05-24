@@ -20,6 +20,11 @@
   	  <label>Email</label>
   	  <input type="email" name="email">
   	</div>
+        <div class="input-group">
+      <label>Delivery Address</label>
+      <input type="text" name="address">
+    </div>
+
   	<div class="input-group">
   	  <label>Password</label>
   	  <input type="password" name="password_1">

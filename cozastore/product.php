@@ -94,6 +94,10 @@ if(isset($_GET["action"]))
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 <!--===============================================================================================-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->		
 </head>
 <body class="animsition">
 
@@ -142,7 +146,7 @@ if(isset($_GET["action"]))
 					<div class="menu-desktop">
 						<ul class="main-menu">
 							<li>
-								<a href="index.html">Home</a>
+								<a href="home.php">Home</a>
 							</li>
 
 							<li class="label1 active-menu"" data-label1="hot">
@@ -303,10 +307,13 @@ if(isset($_GET["action"]))
 					<i class="zmdi zmdi-close"></i>
 				</div>
 			</div>
-			<?php
-				$query = "SELECT * FROM tbl_product ORDER BY id ASC";
+				<?php
+				$item_name = $values["item_name"];
+				$query = "SELECT * FROM tbl_product WHERE name = '$item_name'";
 				$result = mysqli_query($connect, $query);
-					if($row = mysqli_fetch_array($result))
+				if(mysqli_num_rows($result) > 0)
+				{
+					while($row = mysqli_fetch_array($result))
 					{
 				?>
 			
@@ -339,7 +346,7 @@ if(isset($_GET["action"]))
 					</div>
 
 					<div class="header-cart-buttons flex-w w-full">
-						<a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+						<a href="shopping-cart.php" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
 							View Cart
 						</a>
 
@@ -350,6 +357,7 @@ if(isset($_GET["action"]))
 					}
 				}
 			}
+		}
 					?>
 					</div>
 				</div>
@@ -597,7 +605,14 @@ if(isset($_GET["action"]))
 
 			<!--Start All Menu section-->
 			<div class="row isotope-grid">
-				<?php
+				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
+
+				<!-- Block2 -->
+				<div class="block2">
+				<div class="container">
+
+			<!--Fetch product array from database-->
+			<?php
 				$query = "SELECT * FROM tbl_product ORDER BY id ASC";
 				$result = mysqli_query($connect, $query);
 				if(mysqli_num_rows($result) > 0)
@@ -605,46 +620,57 @@ if(isset($_GET["action"]))
 					while($row = mysqli_fetch_array($result))
 					{
 				?>
+			<div class="col-md-4">
+				<form method="post" action="product.php?action=add&id=<?php echo $row["id"]; ?>">
+					<div align="center">
 
-				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
+					<div class="block2-pic hov-img0">
+						<img src="images/<?php echo $row["image"]; ?>" class="img-responsive" />
 
-					<!-- Block2 -->
-					<div class="block2">
-						<div class="block2-pic hov-img0">
-							<img src="images/<?php echo $row["image"]; ?>" class="img-responsive" />
-
-							<a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-								Quick View
-							</a>
 						</div>
 
-						<div class="block2-txt flex-w flex-t p-t-14">
-							<div class="block2-txt-child1 flex-col-l ">
-								<a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+					<h4 class="text-info"><?php echo $row["name"]; ?></h4>
+
+					<h4 class="text-danger">RM<?php echo $row["price"]; ?></h4>
+
+					<div class="flex-w flex-r-m p-b-10">
+						<div class="size-204 flex-w flex-m respon6-next">
+						<div class="wrap-num-product flex-w m-r-20 m-tb-10">
+						<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
+							<i class="fs-16 zmdi zmdi-minus"></i>
+						</div>
+
+						<input class="mtext-104 cl3 txt-center num-product" type="text" name="quantity" value="1">
+
+						<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+							<i class="fs-16 zmdi zmdi-plus"></i>
+						</div>
+						</div>
+
+		<button type="submit" name="add_to_cart" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">Add to Cart </button>
+
+									</div>
+								</div>	
+
+			<input type="hidden" name="hidden_name" value="<?php echo $row["name"]; ?>" />
+
+            <input type="hidden" name="hidden_price" value="<?php echo $row["price"]; ?>" />
+
 	
-								<?php echo $row["name"]; ?>
-								</a>
-
-								<span class="stext-105 cl3">
-								RM<?php echo $row["price"]; ?>								</span>
-							</div>
-
-							<div class="block2-txt-child2 flex-r p-t-3">
-								<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-									<img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png" alt="ICON">
-									<img class="icon-heart2 dis-block trans-04 ab-t-l" src="images/icons/icon-heart-02.png" alt="ICON">
-								</a>
-							</div>
-						</div>
 					</div>
-				</div>
-		</div>
-	</div>
-		
+				</form>
+			</div>
 			<?php
 					}
 				}
 			?>
+			<div style="clear:both"></div>
+
+		</div>
+	</div>
+</div></div>
+	<!--End Product Catalogue-->
+
 		<!-- Footer -->
 	<footer class="bg3 p-t-75 p-b-32">
 		<div class="container">
@@ -791,133 +817,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 			<i class="zmdi zmdi-chevron-up"></i>
 		</span>
 	</div>
-
-	<!-- Modal1 -->
-	<div class="wrap-modal1 js-modal1 p-t-60 p-b-20">
-		<div class="overlay-modal1 js-hide-modal1"></div>
-
-		<div class="container">
-			<div class="bg0 p-t-60 p-b-30 p-lr-15-lg how-pos3-parent">
-				<button class="how-pos3 hov3 trans-04 js-hide-modal1">
-					<img src="images/icons/icon-close.png" alt="CLOSE">
-				</button>
-
-				<div class="row">
-					<div class="col-md-6 col-lg-7 p-b-30">
-						<div class="p-l-25 p-r-30 p-lr-0-lg">
-							<div class="wrap-slick3 flex-sb flex-w">
-								<div class="wrap-slick3-dots"></div>
-								<div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
-
-								<div class="slick3 gallery-lb">
-									<div class="item-slick3" data-thumb="images/product-detail-01.jpg">
-										<div class="wrap-pic-w pos-relative">
-											<img src="images/product-detail-01.jpg" alt="IMG-PRODUCT">
-
-											<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-01.jpg">
-												<i class="fa fa-expand"></i>
-											</a>
-										</div>
-									</div>
-
-									<div class="item-slick3" data-thumb="images/product-detail-02.jpg">
-										<div class="wrap-pic-w pos-relative">
-											<img src="images/product-detail-02.jpg" alt="IMG-PRODUCT">
-
-											<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-02.jpg">
-												<i class="fa fa-expand"></i>
-											</a>
-										</div>
-									</div>
-
-									<div class="item-slick3" data-thumb="images/product-detail-03.jpg">
-										<div class="wrap-pic-w pos-relative">
-											<img src="images/product-detail-03.jpg" alt="IMG-PRODUCT">
-
-											<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-03.jpg">
-												<i class="fa fa-expand"></i>
-											</a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6 col-lg-5 p-b-30">
-					<form method="post" action="product.php?action=add&id=<?php echo $row["id"]; ?>">
-						<?php
-				$query = "SELECT * FROM tbl_product ORDER BY id ASC";
-				$result = mysqli_query($connect, $query);
-					if($row = mysqli_fetch_array($result))
-					{
-				?>
-						<div class="p-r-50 p-t-5 p-lr-0-lg">
-							<h4 class="mtext-105 cl2 js-name-detail p-b-14">
-								<?php echo $row["name"]; ?>							</h4>
-
-							<span class="mtext-106 cl2">
-								RM<?php echo $row["price"]; ?>
-							</span>
-
-							<p class="stext-102 cl3 p-t-23">
-								Hainanese chicken rice is a dish adapted from early Chinese immigrants originally from Hainan province in southern China. It is considered one of the national dishes of Singapore.
-							</p>
-							
-							<!--  -->
-								<div class="flex-w flex-r-m p-b-10">
-									<div class="size-204 flex-w flex-m respon6-next">
-										<div class="wrap-num-product flex-w m-r-20 m-tb-10">
-											<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-												<i class="fs-16 zmdi zmdi-minus"></i>
-											</div>
-
-											<input class="mtext-104 cl3 txt-center num-product" type="text" name="quantity" value="1">
-
-											<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-												<i class="fs-16 zmdi zmdi-plus"></i>
-											</div>
-										</div>
-
-										<input type="hidden" name="hidden_name" value="<?php echo $row["name"]; ?>" />
-
-                                        <input type="hidden" name="hidden_price" value="<?php echo $row["price"]; ?>" />
-
-										<input type="submit" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail" name="add_to_cart" value="Add to Cart">
-										</input>
-									</div>
-								</div>	
-							</div>
-				</form>
-			<?php
-					
-				}
-			?>
-							<!--  -->
-							<div class="flex-w flex-m p-l-100 p-t-40 respon7">
-								<div class="flex-m bor9 p-r-10 m-r-11">
-									<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Add to Wishlist">
-										<i class="zmdi zmdi-favorite"></i>
-									</a>
-								</div>
-
-								<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Facebook">
-									<i class="fa fa-facebook"></i>
-								</a>
-
-								<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Twitter">
-									<i class="fa fa-twitter"></i>
-								</a>
-
-								<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Google Plus">
-									<i class="fa fa-google-plus"></i>
-								</a>
-							</div>
-						</div>
-
-					</div>
-				</div>
-			</div>
-		</div>
 	</div>
 
 <!--===============================================================================================-->	
