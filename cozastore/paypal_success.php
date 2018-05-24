@@ -1,3 +1,4 @@
+    <link rel="icon" type="image/png" href="images/icons/favicon.jpg"/>
 <?php
 include 'conn.php';
 
@@ -9,7 +10,7 @@ $currency_code = $_GET['cc'];
 $payment_status = $_GET['st'];
 
 //Get product price
-$productResult = $db->query("SELECT * FROM tbl_product WHERE id = ".$item_number);
+$productResult = $db->query("SELECT price FROM tbl_product WHERE id = ".$item_number);
 $productRow = $productResult->fetch_assoc();
 $productPrice = $productRow['price'];
 

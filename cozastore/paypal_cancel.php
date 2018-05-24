@@ -3,6 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>PayPal Transaction Cancel :: StudPreneurs</title>
+	<link rel="icon" type="image/png" href="images/icons/favicon.jpg"/>
 </head>
 <body>
 	<h1>Your PayPal transaction has been canceled.</h1>
