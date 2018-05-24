@@ -71,7 +71,7 @@ $connect = mysqli_connect("localhost", "root", "", "food4u");
 							My Account
 						</a>
 
-					<a href="#" class="flex-c-m trans-04 p-lr-25">
+					<a href="index.php?logout='1'" class="flex-c-m trans-04 p-lr-25">
 							<?php  if (isset($_SESSION['username'])) : ?>
 	
 		

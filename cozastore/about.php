@@ -66,11 +66,9 @@ $connect = mysqli_connect("localhost", "root", "", "food4u");
 							My Account
 						</a>
 
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							EN
-						</a>
-					    <?php  if (isset($_SESSION['username'])) : ?>
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
+					<a href="index.php?logout='1'" class="flex-c-m trans-04 p-lr-25">
+							<?php  if (isset($_SESSION['username'])) : ?>
+	
 		
     					<?php echo $_SESSION['username']; ?>
     					<?php endif; ?>
@@ -103,11 +101,11 @@ $connect = mysqli_connect("localhost", "root", "", "food4u");
 								</ul>
 							</li>
 
-							<li class="active-menu">
+							<li>
 								<a href="contact.php">Track</a>
 							</li>
 
-							<li>
+							<li class="active-menu">
 								<a href="contact.php">Contact</a>
 							</li>
 
@@ -120,7 +118,7 @@ $connect = mysqli_connect("localhost", "root", "", "food4u");
 							<i class="zmdi zmdi-search"></i>
 						</div>
 
-						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="2">
+						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="1">
 							<i class="zmdi zmdi-shopping-cart"></i>
 						</div>
 
@@ -236,15 +234,14 @@ $connect = mysqli_connect("localhost", "root", "", "food4u");
 	
 	<!-- Title page -->
 	<section class="bg-img1 txt-center p-lr-15 p-tb-92">
-		<h2 class="ltext-105 cl0 txt-center">
-			Your Order Has Been Received !
+		<h2 class="ltext-105 c12 txt-center">
+			Locate Us
 		</h2>
-		<p>Countdown</p>
 	</section>	
 
 
 	<!-- Content page -->
-	<section class="bg0 p-t-104 p-b-116">
+	<section>
 		<div class="container">
 			<div class="flex-w flex-tr">
 				<div class="size-210 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md">
@@ -320,14 +317,6 @@ $connect = mysqli_connect("localhost", "root", "", "food4u");
 			</div>
 		</div>
 	</section>	
-	
-	
-	<!-- Map -->
-	<div class="map">
-		<div class="size-303" id="google_map" data-map-x="40.691446" data-map-y="-73.886787" data-pin="images/icons/pin.png" data-scrollwhell="0" data-draggable="1" data-zoom="11"></div>
-	</div>
-
-
 
 	<!-- Footer -->
 	<footer class="bg3 p-t-75 p-b-32">

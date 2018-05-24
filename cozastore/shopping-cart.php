@@ -70,11 +70,9 @@ $paypal_username = 'syfqhyusoff-facilitator@gmail.com'; //Business Email
 							My Account
 						</a>
 
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							EN
-						</a>
-					    <?php  if (isset($_SESSION['username'])) : ?>
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
+					<a href="index.php?logout='1'" class="flex-c-m trans-04 p-lr-25">
+							<?php  if (isset($_SESSION['username'])) : ?>
+	
 		
     					<?php echo $_SESSION['username']; ?>
     					<?php endif; ?>
@@ -108,11 +106,7 @@ $paypal_username = 'syfqhyusoff-facilitator@gmail.com'; //Business Email
 							</li>
 
 							<li>
-								<a href="about.html">About</a>
-							</li>
-
-							<li>
-								<a href="contact.php">Contact</a>
+								<a href="about.php">Contact</a>
 							</li>
 						</ul>
 					</div>	

@@ -123,11 +123,9 @@ if(isset($_GET["action"]))
 							My Account
 						</a>
 
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							EN
-						</a>
-					    <?php  if (isset($_SESSION['username'])) : ?>
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
+					<a href="index.php?logout='1'" class="flex-c-m trans-04 p-lr-25">
+							<?php  if (isset($_SESSION['username'])) : ?>
+	
 		
     					<?php echo $_SESSION['username']; ?>
     					<?php endif; ?>
@@ -161,11 +159,7 @@ if(isset($_GET["action"]))
 							</li>
 
 							<li>
-								<a href="about.html">About</a>
-							</li>
-
-							<li>
-								<a href="contact.html">Contact</a>
+								<a href="about.php">Contact</a>
 							</li>
 						</ul>
 					</div>	
@@ -263,11 +257,7 @@ if(isset($_GET["action"]))
 				</li>
 
 				<li>
-					<a href="about.html">About</a>
-				</li>
-
-				<li>
-					<a href="contact.html">Contact</a>a
+					<a href="about.php">Contact</a>a
 				</li>
 			</ul>
 		</div>
@@ -326,7 +316,7 @@ if(isset($_GET["action"]))
 							<img src="images/<?php echo $row["image"]; ?>" class="img-responsive" />						</div>
 
 						<div class="header-cart-item-txt p-t-8">
-							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04" >
 								<?php echo $values["item_name"]; ?>
 							</a>
 
@@ -373,11 +363,11 @@ if(isset($_GET["action"]))
 		<div class="container">
 			<div class="flex-w flex-sb-m p-b-52">
 				<div class="flex-w flex-l-m filter-tope-group m-tb-10">
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*">
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter="*">
 						All Menu
 					</button>
 
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".women">
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter=".women">
 						Kolej Lembah
 					</button>
 
