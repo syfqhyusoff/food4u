@@ -1,4 +1,4 @@
-    <link rel="icon" type="image/png" href="images/icons/favicon.jpg"/>
+<link rel="icon" type="image/png" href="images/icons/favicon.jpg"/>
 <?php
 include 'conn.php';
 

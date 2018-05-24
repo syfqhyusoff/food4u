@@ -3,6 +3,7 @@ session_start();
 
 // initializing variables
 $fullname = "";
+$phone = "";
 $username = "";
 $email    = "";
 $address = "";
@@ -15,8 +16,9 @@ $db = mysqli_connect('localhost', 'root', '', 'food4u');
 if (isset($_POST['reg_user'])) {
   // receive all input values from the form
   $fullname = mysqli_real_escape_string($db, $_POST['fullname']);
+  $phone = mysqli_real_escape_string($db, $_POST['phone']);
   $username = mysqli_real_escape_string($db, $_POST['username']);
-   $address = mysqli_real_escape_string($db, $_POST['address']);
+  $address = mysqli_real_escape_string($db, $_POST['address']);
   $email = mysqli_real_escape_string($db, $_POST['email']);
   $password_1 = mysqli_real_escape_string($db, $_POST['password_1']);
   $password_2 = mysqli_real_escape_string($db, $_POST['password_2']);
@@ -52,8 +54,8 @@ if (isset($_POST['reg_user'])) {
   if (count($errors) == 0) {
   	$password = md5($password_1);//encrypt the password before saving in the database
 
-  	$query = "INSERT INTO users (fullname, username, email, address, password) 
-  			  VALUES('$fullname', '$username', '$email','$address', '$password')";
+  	$query = "INSERT INTO users (fullname, phone, username, email, address, password) 
+  			  VALUES('$fullname','$phone', '$username', '$email','$address', '$password')";
   	mysqli_query($db, $query);
   	$_SESSION['username'] = $username;
   	$_SESSION['success'] = "You are now logged in";

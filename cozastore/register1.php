@@ -22,7 +22,7 @@
         <h1 class="user__title">Please fill in all of your details below</h1>
     </header>
     
-    <form class="form" method="post" action="register.php">
+    <form class="form" method="post" action="register1.php">
           <?php include('errors.php'); ?>
 
         <div class="form__group">
@@ -30,8 +30,8 @@
         </div>
         
         <div class="form__group">
-            <input type="text" placeholder="Username" class="form__input" name="username" />
-        </div>
+            <input type="text" placeholder="Phone Number" class="form__input" name="phone" />
+        </div>        
 
         <div class="form__group">
             <input type="email" placeholder="Email" class="form__input" name="email"/>
@@ -40,7 +40,11 @@
         <div class="form__group">
             <input type="text" placeholder="Delivery Address" class="form__input" name="address"/>
         </div>
-
+        
+        <div class="form__group">
+            <input type="text" placeholder="Username" class="form__input" name="username" />
+        </div>
+        
         <div class="form__group">
             <input type="password" placeholder="Password" class="form__input" name="password_1"/>
         </div>
