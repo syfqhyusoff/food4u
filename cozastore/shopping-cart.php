@@ -112,7 +112,7 @@ $paypal_username = 'syfqhyusoff-facilitator@gmail.com'; //Business Email
 							</li>
 
 							<li>
-								<a href="contact.html">Contact</a>
+								<a href="contact.php">Contact</a>
 							</li>
 						</ul>
 					</div>	
@@ -123,7 +123,7 @@ $paypal_username = 'syfqhyusoff-facilitator@gmail.com'; //Business Email
 							<i class="zmdi zmdi-search"></i>
 						</div>
 
-						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="2">
+						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="1">
 							<i class="zmdi zmdi-shopping-cart"></i>
 						</div>
 
@@ -214,7 +214,7 @@ $paypal_username = 'syfqhyusoff-facilitator@gmail.com'; //Business Email
 				</li>
 
 				<li>
-					<a href="contact.html">Contact</a>a
+					<a href="contact.php">Contact</a>a
 				</li>
 			</ul>
 		</div>
@@ -453,6 +453,8 @@ $paypal_username = 'syfqhyusoff-facilitator@gmail.com'; //Business Email
 								<div class="p-t-15">
 									<span class="stext-112 cl8">
 										<?php echo $row['fullname']; ?>
+										<br/>
+										<?php echo $row['phone']; ?>
 										<br/>
 										<?php echo $row['address']; ?>
 									</span>
