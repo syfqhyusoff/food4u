@@ -2,7 +2,7 @@
 <?php
 include 'conn.php';
 
-//save Transaction information form PayPal
+//save Transaction information from PayPal
 $item_number = $_GET['item_number']; 
 $txn_id = $_GET['tx'];
 $payment_gross = $_GET['amt'];

@@ -491,12 +491,11 @@ RM<?php echo number_format($values["item_quantity"] * $values["item_price"], 2);
         <input type="hidden" name="currency_code" value="MYR">
         
         <!-- Specify URLs -->
-        <input type='hidden' name='cancel_return' value='http://localhost/food4u/cozastore/paypal_cancel.php'>
+        <input type='hidden' name='cancel_return' value='http://localhost/food4u/cozastore/contact.php'>
         <input type='hidden' name='rm' value='2'><!--return to paypal page-->
-        <!--<input type='hidden' name='return' value='http://10.206.2.206/STP_Payments/paypal_success.php'>-->
+        <input type='hidden' name='return' value='http://localhost/food4u/cozastore/paypal_success.php'>
         <input type='hidden' name='notify_url' value='http://localhost/food4u/cozastore/ipn.php'>
 
-        
         <!-- Display the payment button. -->
             <br/>
         <input align="center" type="image" name="submit" border="0" src="images/paynow.png">      

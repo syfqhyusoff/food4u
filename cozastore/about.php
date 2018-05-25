@@ -118,7 +118,7 @@ $connect = mysqli_connect("localhost", "root", "", "food4u");
 							<i class="zmdi zmdi-search"></i>
 						</div>
 
-						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="1">
+						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="0">
 							<i class="zmdi zmdi-shopping-cart"></i>
 						</div>
 
@@ -277,7 +277,9 @@ $connect = mysqli_connect("localhost", "root", "", "food4u");
 							</span>
 
 							<p class="stext-115 cl6 size-213 p-t-18">
-								Coza Store Center 8th floor, 379 Hudson St, New York, NY 10018 US
+								Food4U Hub,<br/>
+								Faculty of Computer Science & Information Technology, University Putra Malaysia
+								42400 Serdang, Selangor.
 							</p>
 						</div>
 					</div>
